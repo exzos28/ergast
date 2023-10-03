@@ -1,17 +1,26 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {RootTabs} from './RootTabs';
+import {BottomTabParamList, RootTabs} from './RootTabs';
+import {NavigatorScreenParams} from '@react-navigation/native';
+import {DriverRacesBinding} from './DriverRacesBinding';
+import {DriverId} from '../store/drivers/types';
 
-const Stack = createStackNavigator();
+export type RootParamList = {
+  Root: NavigatorScreenParams<BottomTabParamList>;
+  DriverRaces: {id: DriverId};
+};
+
+const Stack = createStackNavigator<RootParamList>();
 
 export const NavigationRoot = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerBackTitle: 'Back'}}>
       <Stack.Screen
         name="Root"
         component={RootTabs}
         options={{headerShown: false}}
       />
+      <Stack.Screen name="DriverRaces" component={DriverRacesBinding} />
     </Stack.Navigator>
   );
 };
