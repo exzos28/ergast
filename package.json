@@ -5,7 +5,10 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint": "eslint .",
+    "lint:fix": "yarn lint --fix",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "typecheck": "tsc",
+    "pre-commit": "yarn lint-staged; yarn lint:fix; yarn typecheck",
     "start": "react-native start",
     "test": "jest"
   },
@@ -24,11 +27,16 @@
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.2.1",
     "eslint": "^8.19.0",
+    "husky": "^8.0.3",
     "jest": "^29.2.1",
+    "lint-staged": "^14.0.1",
     "metro-react-native-babel-preset": "0.76.8",
     "prettier": "^2.4.1",
     "react-test-renderer": "18.2.0",
     "typescript": "4.8.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint"
   },
   "engines": {
     "node": ">=16"
